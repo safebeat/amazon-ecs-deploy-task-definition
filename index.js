@@ -38,7 +38,7 @@ async function updateEcsService(ecs, clusterName, service, taskDefArn, waitForSe
   if (waitForService && waitForService.toLowerCase() === 'true') {
     core.debug(`Waiting for the service to become stable. Will wait for ${waitForMinutes} minutes`);
     const maxAttempts = (waitForMinutes * 60) / WAIT_DEFAULT_DELAY_SEC;
-    await ecs.waitFor('servicesStable', {
+    await ecs.waitFor('tasksRunning', {
       services: [service],
       cluster: clusterName,
       $waiter: {
